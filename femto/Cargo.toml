@@ -8,13 +8,13 @@ clap = { version = "4.5.32", features = ["derive"] }
 inquire = "0.7.5"
 ron = { version = "0.9.0", optional = true }
 serde = { version = "1.0.219", features = ["derive"] }
-serde_json = { version = "1.0.140", optional = true }
+serde_json = "1.0.140"
 toml = { version = "0.8.20", optional = true }
+femto_common = {path = "../femto_common"}
 
 [features]
 default = ["config"]
 
-config = ["config_ron", "config_toml", "config_json"]
+config = ["config_ron", "config_toml"]
 config_ron = ["dep:ron"]
 config_toml = ["dep:toml"]
-config_json = ["dep:serde_json"]

@@ -4,7 +4,11 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+clap = { version = "4.5.32", features = ["cargo", "derive"] }
+fern = { version = "0.7.1", features = ["colored"] }
 git2 = "0.20.1"
+github-languages = "0.4.0"
 handlebars = { version = "6.3.2", features = ["string_helpers"] }
+log = { version = "0.4.26", features = ["kv_serde", "serde"] }
 reqwest = "0.12.15"
 serde = { version = "1.0.219", features = ["derive"] }
