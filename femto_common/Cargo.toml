@@ -10,5 +10,8 @@ git2 = "0.20.1"
 github-languages = "0.4.0"
 handlebars = { version = "6.3.2", features = ["string_helpers"] }
 log = { version = "0.4.26", features = ["kv_serde", "serde"] }
+regex = "1.11.1"
 reqwest = "0.12.15"
 serde = { version = "1.0.219", features = ["derive"] }
+thiserror = "2.0.12"
+url = { version = "2.5.4", features = ["serde"] }
