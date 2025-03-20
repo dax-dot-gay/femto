@@ -32,6 +32,13 @@ pub mod subcommands {
             .arg(arg!(--github <SOURCE> "Loads a template from a Github repo, with the format \"USER/REPO\"."))
             .arg(Arg::new("overwrite").long("overwrite").action(ArgAction::SetTrue).help("Allows overwriting of files if the current directory is not empty."))
     }
+
+    pub fn schema() -> Command {
+        Command::new("schema")
+            .about("Generates JSON schemas for configuration types, outputting to the current directory by default.")
+            .arg(Arg::new("config").long("config").short('c').help("Output file for TemplateConfig schema").value_name("FILE").value_parser(value_parser!(std::path::PathBuf)).default_value("femto-template.schema.json"))
+            .arg(Arg::new("project").long("project").short('p').help("Output file for ProjectConfig schema").value_name("FILE").value_parser(value_parser!(std::path::PathBuf)).default_value("femto-project.schema.json"))
+    }
 }
 
 pub fn femto_cli() -> Command {
@@ -39,4 +46,5 @@ pub fn femto_cli() -> Command {
         .arg(arg!(-v --verbose ... "Verbosity level, up to -vvv"))
         .subcommand(subcommands::new())
         .subcommand(subcommands::init())
+        .subcommand(subcommands::schema())
 }

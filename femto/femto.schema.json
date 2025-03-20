@@ -1,0 +1,464 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TemplateConfig",
+  "type": "object",
+  "required": [
+    "name",
+    "slug"
+  ],
+  "properties": {
+    "metadata": {
+      "default": null,
+      "anyOf": [
+        {
+          "$ref": "#/definitions/TemplateMetadata"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "name": {
+      "type": "string"
+    },
+    "package_managers": {
+      "default": null,
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/TemplatePackageManager"
+      }
+    },
+    "slug": {
+      "type": "string"
+    },
+    "stages": {
+      "default": null,
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "$ref": "#/definitions/TemplateStage"
+      }
+    }
+  },
+  "definitions": {
+    "NumberType": {
+      "type": "string",
+      "enum": [
+        "SignedFloat",
+        "UnsignedFloat",
+        "SignedInt",
+        "UnsignedInt"
+      ]
+    },
+    "TemplateField": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "key",
+            "prompt",
+            "type"
+          ],
+          "properties": {
+            "default": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "help": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "key": {
+              "type": "string"
+            },
+            "placeholder": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "prompt": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "text"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "key",
+            "prompt",
+            "type"
+          ],
+          "properties": {
+            "default": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "help": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "key": {
+              "type": "string"
+            },
+            "placeholder": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "prompt": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "password"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "key",
+            "prompt",
+            "type"
+          ],
+          "properties": {
+            "default": {
+              "default": null,
+              "type": [
+                "number",
+                "null"
+              ],
+              "format": "double"
+            },
+            "help": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "key": {
+              "type": "string"
+            },
+            "max": {
+              "default": null,
+              "type": [
+                "number",
+                "null"
+              ],
+              "format": "double"
+            },
+            "min": {
+              "default": null,
+              "type": [
+                "number",
+                "null"
+              ],
+              "format": "double"
+            },
+            "mode": {
+              "default": "SignedFloat",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/NumberType"
+                }
+              ]
+            },
+            "prompt": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "number"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "key",
+            "prompt",
+            "type"
+          ],
+          "properties": {
+            "default": {
+              "default": false,
+              "type": "boolean"
+            },
+            "help": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "key": {
+              "type": "string"
+            },
+            "prompt": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "boolean"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "key",
+            "options",
+            "prompt",
+            "type"
+          ],
+          "properties": {
+            "default": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "help": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "key": {
+              "type": "string"
+            },
+            "options": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "prompt": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "select"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "key",
+            "options",
+            "prompt",
+            "type"
+          ],
+          "properties": {
+            "default": {
+              "default": null,
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": "string"
+              }
+            },
+            "help": {
+              "default": null,
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "key": {
+              "type": "string"
+            },
+            "options": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "prompt": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "select_multiple"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "TemplateMetadata": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "languages": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "TemplatePackageManager": {
+      "type": "object",
+      "required": [
+        "add_package",
+        "help",
+        "name",
+        "other_commands",
+        "path",
+        "remove_package"
+      ],
+      "properties": {
+        "add_package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "help": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "other_commands": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            ],
+            "maxItems": 2,
+            "minItems": 2
+          }
+        },
+        "path": {
+          "type": "string"
+        },
+        "remove_package": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TemplateStage": {
+      "type": "object",
+      "required": [
+        "fields",
+        "key",
+        "name"
+      ],
+      "properties": {
+        "description": {
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TemplateField"
+          }
+        },
+        "key": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

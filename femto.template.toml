@@ -1,0 +1,7 @@
+#:schema ./femto/femto.schema.json
+
+name = "Example Schema"
+slug = "example-schema"
+
+[metadata]
+version = "0.1.0"

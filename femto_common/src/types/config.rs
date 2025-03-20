@@ -1,18 +1,19 @@
 use std::collections::HashMap;
 
+use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-#[derive(Serialize, Deserialize, Clone, Debug, Default)]
+#[derive(Serialize, Deserialize, Clone, Debug, Default, JsonSchema)]
 pub struct TemplateMetadata {
     pub version: Option<String>,
-    pub tags: Vec<String>,
-    pub languages: Vec<String>,
+    pub tags: Option<Vec<String>>,
+    pub languages: Option<Vec<String>>,
     pub author: Option<String>,
     pub url: Option<String>,
     pub description: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, JsonSchema)]
 pub enum NumberType {
     #[serde(alias = "float")]
     SignedFloat,
@@ -33,7 +34,7 @@ impl Default for NumberType {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, JsonSchema)]
 #[serde(rename_all = "snake_case", tag = "type")]
 pub enum TemplateField {
     Text {
@@ -113,7 +114,7 @@ pub enum TemplateField {
     },
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, JsonSchema)]
 pub struct TemplateCommon {
     key: String,
     prompt: String,
@@ -183,7 +184,7 @@ impl TemplateField {
     }
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, JsonSchema)]
 pub struct TemplateStage {
     pub key: String,
     pub name: String,
@@ -193,7 +194,7 @@ pub struct TemplateStage {
     pub description: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, JsonSchema)]
 pub struct TemplatePackageManager {
     pub name: String,
     pub path: String,
@@ -207,11 +208,17 @@ pub struct TemplatePackageManager {
     pub other_commands: HashMap<String, (String, Vec<String>)>
 }
 
-#[derive(Serialize, Deserialize, Clone, Debug)]
+#[derive(Serialize, Deserialize, Clone, Debug, JsonSchema)]
 pub struct TemplateConfig {
     pub slug: String,
     pub name: String,
+
+    #[serde(default)]
     pub metadata: Option<TemplateMetadata>,
-    pub stages: Vec<TemplateStage>,
-    pub package_managers: Vec<TemplatePackageManager>
+
+    #[serde(default)]
+    pub stages: Option<Vec<TemplateStage>>,
+
+    #[serde(default)]
+    pub package_managers: Option<Vec<TemplatePackageManager>>
 }
